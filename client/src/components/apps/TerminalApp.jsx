@@ -93,7 +93,7 @@ export default function TerminalApp() {
         type: 'social',
         text: `[SOCIAL HANDLES]
         ---------------------------------------------------------
-        * PORTFOLIO  :: https://my-latest-portfolio-ten.vercel.app/
+        * PORTFOLIO  :: https://atul-s-portfolio-navy.vercel.app/
         * LINKEDIN   :: https://www.linkedin.com/in/atul-singh-chauhan-a955b529b/
         * GITHUB     :: https://github.com/seriesatul
         * LEETCODE   :: https://leetcode.com/u/atulsingh04895/
@@ -186,9 +186,41 @@ export default function TerminalApp() {
             {/* Clickable links wrapper specifically for the socials command */}
             {line.type === 'social' && (
               <div className="mt-2 space-y-1.5 pl-4 text-sky-400">
-                <p> GitHub: <a href="https://github.com/Atul" target="_blank" rel="noopener noreferrer" className="hover:underline text-cyan-400">github.com/seriesatul</a></p>
-                <p> LinkedIn: <a href="https://linkedin.com/in/Atul" target="_blank" rel="noopener noreferrer" className="hover:underline text-cyan-400">linkedin.com/in/Atul</a></p>
-                <p> Twitter/X: <a href="https://x.com" target="_blank" rel="noopener noreferrer" className="hover:underline text-cyan-400">twitter.com/Atul</a></p>
+                <p>
+                GitHub:{" "}
+                <a
+                    href="https://github.com/seriesatul"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:underline text-cyan-400"
+                >
+                    github.com/seriesatul
+                </a>
+                </p>
+
+                <p>
+                LinkedIn:{" "}
+                <a
+                    href="https://www.linkedin.com/in/atul-singh-chauhan-a955b529b/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:underline text-cyan-400"
+                >
+                    linkedin.com/in/atul-singh-chauhan-a955b529b
+                </a>
+                </p>
+
+                <p>
+                Portfolio:{" "}
+                <a
+                    href="https://atul-s-portfolio-navy.vercel.app/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:underline text-cyan-400"
+                >
+                    atul-s-portfolio-navy.vercel.app
+                </a>
+                </p>
               </div>
             )}
           </div>

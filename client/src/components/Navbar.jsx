@@ -1,8 +1,18 @@
 import React from 'react'
 import { navbarLinks, navIcons } from '../constants/navbar.constants'
+import { useOSStore } from '../store/useOSStore';
 import dayjs from 'dayjs';
 
 const Navbar = () => {
+  const toggleWidgets = useOSStore((state) => state.toggleWidgets);
+
+  const handleIconClick = (id) => {
+    // Toggles the widgets panel if clicking the widgets/mode icon
+    if (id === 'toggle' || id === 'mode' || id === 'widgets' || id === 4) {
+      toggleWidgets();
+    }
+  };
+
   return (
     <nav className="flex items-center bg-white/50 backdrop-blur-3xl p-2 px-5 select-none gap-6">
       
@@ -12,11 +22,11 @@ const Navbar = () => {
         <p className="font-bold text-sm">Atul's Portfolio</p>
       </div>
 
-      {/* 2. Left-Middle Side: Navigation Links (mr-auto pushes icons to the right) */}
+      {/* 2. Left-Middle Side: Navigation Links */}
       <ul className="flex items-center gap-5 max-sm:hidden mr-auto">
         {navbarLinks.map(({ id, name }) => (
           <li key={id}>
-            <p className="text-sm cursor-pointer hover:underline transition-all">
+            <p className="text-sm cursor-pointer hover:font-semibold transition-all">
               {name}
             </p>
           </li>
@@ -27,15 +37,19 @@ const Navbar = () => {
       <div className="flex items-center gap-5 max-sm:hidden ml-auto">
         <ul className="flex items-center gap-5">
           {navIcons.map(({ id, img }) => (
-            <li key={id} className="icon">
+            <li key={id} className="icon" onClick={() => handleIconClick(id)}>
               <img src={img} alt={`Icon ${id}`} className="w-5 h-5 object-contain" />
             </li>
           ))}
         </ul>
 
-       <time className="text-sm font-medium text-black flex items-center gap-3">
-        <span>{dayjs().format("ddd MMM D")}</span>
-        <span>{dayjs().format("h:mm A")}</span>
+        {/* Clicking the Date/Time toggles the widgets panel (Official macOS behavior) */}
+        <time 
+          onClick={toggleWidgets}
+          className="text-sm font-medium text-black flex items-center gap-3 cursor-pointer hover:bg-black/5 px-2 py-1 rounded transition-colors"
+        >
+          <span>{dayjs().format("ddd MMM D")}</span>
+          <span>{dayjs().format("h:mm A")}</span>
         </time>
       </div>
 

@@ -7,6 +7,7 @@ import Window from './components/Window';
 import BootScreen from './components/BootScreen';
 import Desktop from './components/Desktop';
 import Dock from './components/Dock';
+import DesktopWidgets from './components/DesktopWidgets'; // <-- Import the Widgets Layer
 
 // Individual Modular Application Contents
 import FinderApp from './components/apps/FinderApp';
@@ -60,10 +61,13 @@ export default function App() {
         <Navbar />
 
         {/* Workspace Canvas Boundaries */}
-        <div className="relative w-full h-[calc(100vh-40px)] p-6">
+        <div id="workspace" className="relative w-full h-[calc(100vh-40px)] p-6">
           
           {/* Grid of File Shortcuts */}
           <Desktop onLaunchApp={handleLaunchApp} />
+
+          {/* Desktop Widgets Layer (behind windows, clickable) */}
+          <DesktopWidgets />
 
           {/* Draggable Windows Orchestration */}
           <Window id="finder">

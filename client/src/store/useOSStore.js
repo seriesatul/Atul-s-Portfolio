@@ -20,6 +20,7 @@ export const useOSStore = create((set) => ({
 
   activeWindowId: null,
   maxZIndex: 10,
+  widgetsOpen: false, // Manages Desktop Widgets panel visibility
 
   // Open window & elevate layer index
   openWindow: (id) => set((state) => {
@@ -80,5 +81,10 @@ export const useOSStore = create((set) => ({
       ...state.windows,
       [id]: { ...state.windows[id], x, y }
     }
+  })),
+
+  // Toggle the desktop widgets panel in/out of the viewport
+  toggleWidgets: () => set((state) => ({
+    widgetsOpen: !state.widgetsOpen
   })),
 }));

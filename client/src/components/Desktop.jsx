@@ -9,8 +9,8 @@ export default function Desktop({ onLaunchApp }) {
       {desktopFiles.map(({ id, name, icon, targetApp }) => (
         <button
           key={id}
-          onDoubleClick={() => onLaunchApp(targetApp)}
-          className="group flex flex-col items-center gap-1 cursor-default p-1.5 rounded-lg hover:bg-white/10 active:bg-white/20 w-20 transition-colors"
+          onClick={() => onLaunchApp(targetApp)} // Changed from onDoubleClick to onClick for instant launch
+          className="group flex flex-col items-center gap-1 cursor-pointer p-1.5 rounded-lg hover:bg-white/10 active:bg-white/20 w-20 transition-colors"
         >
           <img 
             src={icon} 

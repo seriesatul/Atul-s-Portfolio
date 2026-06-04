@@ -7,8 +7,8 @@ export const useOSStore = create((set) => ({
     safari: { id: 'safari', title: 'Safari', icon: '/images/safari.png', isOpen: false, isMinimized: false, isMaximized: false, zIndex: 1, x: 140, y: 120, width: 850, height: 550 },
     terminal: { id: 'terminal', title: 'Terminal', icon: '/images/terminal.png', isOpen: false, isMinimized: false, isMaximized: false, zIndex: 1, x: 200, y: 160, width: 620, height: 400 },
     photos: { id: 'photos', title: 'Photos', icon: '/images/photos.png', isOpen: false, isMinimized: false, isMaximized: false, zIndex: 1, x: 240, y: 200, width: 700, height: 460 },
-    resume: { id: 'resume', title: 'Resume.pdf', icon: '/images/pdf.png', isOpen: false, isMinimized: false, isMaximized: false, zIndex: 1, x: 100, y: 60, width: 600, height: 750 },
-    contact: { id: 'contact', title: 'Contact', icon: '/images/contact.png', isOpen: false, isMinimized: false, isMaximized: false, zIndex: 1, x: 300, y: 100, width: 550, height: 450 },
+    resume: { id: 'resume', title: 'Resume.pdf', icon: '/images/pdf.png', isOpen: false, isMinimized: false, isMaximized: false, zIndex: 1, x: 100, y: 60, width: 600, height: 680 },
+    contact: { id: 'contact', title: 'Contact', icon: '/images/contact.png', isOpen: false, isMinimized: false, isMaximized: false, zIndex: 1, x: 300, y: 100, width: 620, height: 460 },
   },
   
   // Grid layout for files on the desktop

@@ -19,10 +19,28 @@ const fileSystem = {
     { id: 'terminal_shortcut', name: 'Terminal', icon: '/images/terminal.png', targetApp: 'terminal', type: 'app' },
   ],
   projects: [
-    // Video-based projects matching your three recent entries
-    { id: 'reelcommerce_video', name: 'ReelCommerce.mp4', type: 'video', videoTitle: 'ReelCommerce Demo', videoSrc: '/videos/ReelCommerce.mp4' },
-    { id: 'prepmate_video', name: 'PrepMate_AI.mp4', type: 'video', videoTitle: 'PrepMate AI Demo', videoSrc: '/videos/PrepMate_AI.mp4' },
-    { id: 'bujji_video', name: 'BUJJI_Assistant.mp4', type: 'video', videoTitle: 'BUJJI Desktop Assistant Demo', videoSrc: '/videos/BUJJI_Assistant.mp4' },
+    // Video-based projects integrated directly with your Vercel Edge CDN links
+    { 
+      id: 'reelcommerce_video', 
+      name: 'ReelCommerce.mp4', 
+      type: 'video', 
+      videoTitle: 'ReelCommerce Demo', 
+      videoSrc: 'https://4huhagrn2xith9y5.public.blob.vercel-storage.com/ReelCommerce.mp4' 
+    },
+    { 
+      id: 'prepmate_video', 
+      name: 'PrepMate_AI.mp4', 
+      type: 'video', 
+      videoTitle: 'PrepMate AI Demo', 
+      videoSrc: 'https://4huhagrn2xith9y5.public.blob.vercel-storage.com/PrepMate_AI.mp4' 
+    },
+    { 
+      id: 'bujji_video', 
+      name: 'BUJJI_Assistant.mp4', 
+      type: 'video', 
+      videoTitle: 'BUJJI Desktop Assistant Demo', 
+      videoSrc: 'https://4huhagrn2xith9y5.public.blob.vercel-storage.com/BUJJI_Assistant.mp4' 
+    },
   ]
 };
 
@@ -61,7 +79,7 @@ export default function FinderApp() {
     if (item.type === 'directory') {
       navigateToDir(item.targetDir);
     } else if (item.type === 'video') {
-      // Connects double-clicking video files to play inside QuickTime Player app
+      // Launches QuickTime Player dynamically with specific video details
       playVideo(item.videoTitle, item.videoSrc);
     } else if (item.targetApp) {
       openWindow(item.targetApp);
@@ -74,7 +92,10 @@ export default function FinderApp() {
   );
 
   return (
-    <div className="flex flex-col h-full bg-white select-none">
+    <div 
+      className="flex flex-col h-full bg-white select-none"
+      style={{ fontFamily: '"Plus Jakarta Sans", -apple-system, sans-serif' }}
+    >
       
       {/* 1. Finder Header / Navigation Toolbar */}
       <div className="flex items-center justify-between px-4 py-2.5 bg-gray-50 border-b border-gray-200 shrink-0">
@@ -162,11 +183,8 @@ export default function FinderApp() {
                   {/* If item is a video, render a premium media file wrapper */}
                   {file.type === 'video' ? (
                     <div className="relative size-11 bg-gray-100 rounded-md border border-gray-200 flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform duration-200">
-                      {/* Movie Reel Film Strips */}
                       <div className="absolute top-0 bottom-0 left-1 w-1 border-r border-dashed border-gray-300" />
                       <div className="absolute top-0 bottom-0 right-1 w-1 border-l border-dashed border-gray-300" />
-                      
-                      {/* Play Triangle Icon */}
                       <svg className="w-4 h-4 fill-gray-500" viewBox="0 0 24 24">
                         <path d="M8 5v14l11-7z" />
                       </svg>

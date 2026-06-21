@@ -3,15 +3,12 @@ import gsap from 'gsap';
 
 // Library Collection (utilizing your physical graphic assets)
 const initialLibrary = [
-  { id: 'pic1', title: 'Workspace Desk Setup', src: '/images/gal1.png', category: 'library' },
-  { id: 'pic2', title: 'Creative Wireframes', src: '/images/gal2.png', category: 'library' },
-  { id: 'pic3', title: 'Code Compilation', src: '/images/gal3.png', category: 'library' },
-  { id: 'pic4', title: 'UI/UX Design Mockups', src: '/images/gal4.png', category: 'library' },
-  { id: 'pic5', title: 'Developer Profile Portrait', src: '/images/adrian.jpg', category: 'personal' },
-  { id: 'pic6', title: 'Interactive Prototype Specs', src: '/images/adrian-2.jpg', category: 'personal' },
-  { id: 'pic7', title: 'Frontend Layout Prototypes', src: '/images/blog1.png', category: 'projects' },
-  { id: 'pic8', title: 'Responsive Asset Assets', src: '/images/blog2.png', category: 'projects' },
-  { id: 'pic9', title: 'System Architecture Diagram', src: '/images/blog3.png', category: 'projects' },
+  { id: 'pic1', title: 'Linkedin Photo', src: '/images/atul.png', category: 'library' },
+  { id: 'pic2', title: 'Project Geek', src: '/images/atul-2.png', category: 'library' },
+  { id: 'pic3', title: 'Cartoon Me', src: '/images/atul-3.png', category: 'library' },
+  { id: 'pic4', title: 'Ree-Commerce', src: '/images/project-1.png', category: 'project' },
+  { id: 'pic5', title: 'Bujji AI', src: '/images/project-2.png', category: 'project' },
+  { id: 'pic6', title: 'Prepmate', src: '/images/project-3.png', category: 'project' },
 ];
 
 export default function PhotosApp() {

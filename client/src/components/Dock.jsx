@@ -43,7 +43,6 @@ export default function Dock({ onLaunchApp }) {
     });
   };
 
-  // Fixed function name to match the button's onClick call
   const handleIconClick = (id) => {
     setBouncingAppId(id);
     const el = dockItemRefs.current[id];
@@ -80,35 +79,38 @@ export default function Dock({ onLaunchApp }) {
           perspective: '1000px'
         }}
       >
-        {Object.values(windows).map((app) => (
-          <button
-            key={app.id}
-            ref={(el) => (dockItemRefs.current[app.id] = el)}
-            onClick={() => handleIconClick(app.id)}
-            className="relative flex flex-col items-center group cursor-pointer origin-bottom"
-            style={{ willChange: 'transform' }}
-          >
-            {/* Glossy Tooltip App Label */}
-            <span className="absolute -top-12 scale-0 group-hover:scale-100 transition-all duration-150 rounded-md bg-white/80 backdrop-blur-md border border-white/30 px-2.5 py-1 text-[11px] font-medium text-gray-800 shadow-md whitespace-nowrap pointer-events-none">
-              {app.title}
-            </span>
-            
-            <img
-              src={app.icon}
-              alt={app.title}
-              className="size-12 3xl:size-20 object-contain filter drop-shadow-[0_4px_6px_rgba(0,0,0,0.25)] pointer-events-none select-none"
-            />
-
-            {/* macOS running application indicator dot */}
-            {app.isOpen && (
-              <div 
-                className={`absolute -bottom-1 size-1 rounded-full bg-white shadow shadow-white transition-opacity ${
-                  bouncingAppId === app.id ? 'opacity-30' : 'opacity-100'
-                }`} 
+        {/* Filters out both 'about' and 'quicktime' windows from rendering inside the Dock */}
+        {Object.values(windows)
+          .filter((app) => app.id !== 'about' && app.id !== 'quicktime')
+          .map((app) => (
+            <button
+              key={app.id}
+              ref={(el) => (dockItemRefs.current[app.id] = el)}
+              onClick={() => handleIconClick(app.id)}
+              className="relative flex flex-col items-center group cursor-pointer origin-bottom"
+              style={{ willChange: 'transform' }}
+            >
+              {/* Glossy Tooltip App Label */}
+              <span className="absolute -top-12 scale-0 group-hover:scale-100 transition-all duration-150 rounded-md bg-white/80 backdrop-blur-md border border-white/30 px-2.5 py-1 text-[11px] font-medium text-gray-800 shadow-md whitespace-nowrap pointer-events-none">
+                {app.title}
+              </span>
+              
+              <img
+                src={app.icon}
+                alt={app.title}
+                className="size-12 3xl:size-20 object-contain filter drop-shadow-[0_4px_6px_rgba(0,0,0,0.25)] pointer-events-none select-none"
               />
-            )}
-          </button>
-        ))}
+
+              {/* macOS running application indicator dot */}
+              {app.isOpen && (
+                <div 
+                  className={`absolute -bottom-1 size-1 rounded-full bg-white shadow shadow-white transition-opacity ${
+                    bouncingAppId === app.id ? 'opacity-30' : 'opacity-100'
+                  }`} 
+                />
+              )}
+            </button>
+          ))}
       </div>
     </div>
   );

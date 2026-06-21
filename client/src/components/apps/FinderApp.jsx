@@ -19,20 +19,20 @@ const fileSystem = {
     { id: 'terminal_shortcut', name: 'Terminal', icon: '/images/terminal.png', targetApp: 'terminal', type: 'app' },
   ],
   projects: [
-    { id: 'portfolio_proj', name: 'macOS Portfolio.app', icon: '/images/safari.png', targetApp: 'safari', type: 'project' },
-    { id: 'chat_proj', name: 'DevSpace Chat.app', icon: '/images/safari.png', targetApp: 'safari', type: 'project' },
-    { id: 'task_proj', name: 'TaskGrid Kanban.app', icon: '/images/safari.png', targetApp: 'safari', type: 'project' },
+    // Video-based projects matching your three recent entries
+    { id: 'reelcommerce_video', name: 'ReelCommerce.mp4', type: 'video', videoTitle: 'ReelCommerce Demo', videoSrc: '/videos/ReelCommerce.mp4' },
+    { id: 'prepmate_video', name: 'PrepMate_AI.mp4', type: 'video', videoTitle: 'PrepMate AI Demo', videoSrc: '/videos/PrepMate_AI.mp4' },
+    { id: 'bujji_video', name: 'BUJJI_Assistant.mp4', type: 'video', videoTitle: 'BUJJI Desktop Assistant Demo', videoSrc: '/videos/BUJJI_Assistant.mp4' },
   ]
 };
 
 export default function FinderApp() {
-  const { openWindow } = useOSStore();
+  const { openWindow, playVideo } = useOSStore();
   const [currentDir, setCurrentDir] = useState('desktop');
   const [dirHistory, setDirHistory] = useState(['desktop']);
   const [historyIndex, setHistoryIndex] = useState(0);
   const [searchQuery, setSearchQuery] = useState('');
 
-  // Handles recursive directory navigation histories
   const navigateToDir = (dirKey) => {
     const newHistory = dirHistory.slice(0, historyIndex + 1);
     newHistory.push(dirKey);
@@ -60,13 +60,14 @@ export default function FinderApp() {
   const handleItemClick = (item) => {
     if (item.type === 'directory') {
       navigateToDir(item.targetDir);
+    } else if (item.type === 'video') {
+      // Connects double-clicking video files to play inside QuickTime Player app
+      playVideo(item.videoTitle, item.videoSrc);
     } else if (item.targetApp) {
-      // Connects Finder clicks directly to Zustand's global app launcher
       openWindow(item.targetApp);
     }
   };
 
-  // Filter files in the grid based on search bar queries
   const activeFiles = fileSystem[currentDir] || [];
   const filteredFiles = activeFiles.filter(file => 
     file.name.toLowerCase().includes(searchQuery.toLowerCase())
@@ -77,8 +78,6 @@ export default function FinderApp() {
       
       {/* 1. Finder Header / Navigation Toolbar */}
       <div className="flex items-center justify-between px-4 py-2.5 bg-gray-50 border-b border-gray-200 shrink-0">
-        
-        {/* Navigation Arrow buttons */}
         <div className="flex gap-1">
           <button 
             onClick={handleBack}
@@ -99,13 +98,11 @@ export default function FinderApp() {
             </svg>
           </button>
           
-          {/* Breadcrumb Path name */}
           <span className="ml-3 text-xs font-semibold text-gray-500 self-center capitalize">
             Macintosh HD › {currentDir}
           </span>
         </div>
 
-        {/* Dynamic Search filter bar */}
         <div className="relative w-40">
           <input 
             type="text" 
@@ -123,7 +120,7 @@ export default function FinderApp() {
       {/* 2. Main Window Panel (Sidebar + File Grid) */}
       <div className="flex flex-1 overflow-hidden h-full">
         
-        {/* Left Side: Frosted Finder Sidebar */}
+        {/* Left Side: Finder Sidebar */}
         <div className="w-44 bg-gray-50/80 border-r border-gray-200/50 p-3 flex flex-col gap-4 select-none">
           <div>
             <h4 className="text-[10px] font-bold text-gray-400 tracking-wider mb-1.5 px-2">FAVORITES</h4>
@@ -152,7 +149,7 @@ export default function FinderApp() {
           </div>
         </div>
 
-        {/* Right Side: Active Files grid view */}
+        {/* Right Side: Active Files Grid View */}
         <div className="flex-1 p-5 overflow-y-auto bg-white">
           {filteredFiles.length > 0 ? (
             <div className="grid grid-cols-4 md:grid-cols-5 gap-4">
@@ -160,14 +157,28 @@ export default function FinderApp() {
                 <button
                   key={file.id}
                   onClick={() => handleItemClick(file)}
-                  className="group flex flex-col items-center gap-1.5 p-2 rounded-lg hover:bg-gray-100 active:bg-gray-200 transition-colors w-24 mx-auto"
+                  className="group flex flex-col items-center gap-1.5 p-2 rounded-lg hover:bg-gray-100 active:bg-gray-200 transition-colors w-24 mx-auto text-center"
                 >
-                  <img 
-                    src={file.icon} 
-                    alt={file.name} 
-                    className="size-11 object-contain filter drop-shadow-sm group-hover:scale-105 transition-transform duration-200" 
-                  />
-                  <span className="text-[11px] text-gray-800 font-medium text-center leading-tight truncate w-full">
+                  {/* If item is a video, render a premium media file wrapper */}
+                  {file.type === 'video' ? (
+                    <div className="relative size-11 bg-gray-100 rounded-md border border-gray-200 flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform duration-200">
+                      {/* Movie Reel Film Strips */}
+                      <div className="absolute top-0 bottom-0 left-1 w-1 border-r border-dashed border-gray-300" />
+                      <div className="absolute top-0 bottom-0 right-1 w-1 border-l border-dashed border-gray-300" />
+                      
+                      {/* Play Triangle Icon */}
+                      <svg className="w-4 h-4 fill-gray-500" viewBox="0 0 24 24">
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
+                    </div>
+                  ) : (
+                    <img 
+                      src={file.icon} 
+                      alt={file.name} 
+                      className="size-11 object-contain filter drop-shadow-sm group-hover:scale-105 transition-transform duration-200" 
+                    />
+                  )}
+                  <span className="text-[11px] text-gray-800 font-medium leading-tight truncate w-full mt-1">
                     {file.name}
                   </span>
                 </button>

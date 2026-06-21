@@ -1,38 +1,38 @@
 import React, { useState, useRef, useEffect } from 'react';
 import gsap from 'gsap';
 
-// Mock Portfolio Projects Data (utilizing your physical graphic assets)
+// Updated Portfolio Projects Data (with detailed summaries and live locations)
 const projects = [
   {
-    id: 'macos_portfolio',
-    title: 'macOS Interactive Portfolio',
-    url: 'https://atul.dev/projects/macos-portfolio',
+    id: 'reelcommerce',
+    title: 'ReelCommerce',
+    url: 'https://ree-commerce.vercel.app',
     image: '/images/project-1.png',
     year: '2026',
-    description: 'A fully interactive, state-driven macOS desktop portfolio simulation built with React, GSAP, and Zustand. Features include a dynamic draggable window manager, fully functional custom bash shell, desktop widget engines, and a responsive glassmorphic dock.',
-    tags: ['React', 'Zustand', 'GSAP', 'Tailwind CSS'],
-    github: 'https://github.com/seriesatul/Atul-s-Portfolio',
-    live: 'https://atul.dev'
+    description: 'A full-stack, video-first social commerce e-commerce platform inspired by short-form reels. Sellers can build shoppable reels, tag inventories inside videos, manage stores, and fulfill transactions, while buyers discover products via recursive scrolling social actions.',
+    tags: ['Next.js', 'Node.js', 'MongoDB', 'Socket.io', 'Tailwind CSS'],
+    github: 'https://github.com/seriesatul/ReeCommerce',
+    live: 'https://ree-commerce.vercel.app'
   },
   {
-    id: 'devspace_chat',
-    title: 'DevSpace Chat',
-    url: 'https://devspace.chat',
+    id: 'prepmate_ai',
+    title: 'PrepMate AI',
+    url: 'https://prepmate-ai.vercel.app',
     image: '/images/project-2.png',
     year: '2025',
-    description: 'A real-time socket-based communication platform engineered for programmers. Features secure authenticated rooms, code-snippet syntax highlighting inside message containers, markdown rendering, and persistent storage of active channel logs.',
-    tags: ['Node.js', 'Express', 'Socket.io', 'MongoDB', 'React'],
-    github: 'https://github.com/seriesatul',
+    description: 'An AI-powered productivity platform that generates structured learning courses, summaries, customizable notes, and progress-tracked interactive quizzes using Gemini, supported by Clerk auth and NeonDB PostgreSQL persistence.',
+    tags: ['Next.js', 'TypeScript', 'Drizzle ORM', 'Clerk', 'NeonDB', 'Gemini API'],
+    github: 'https://github.com/seriesatul', // Update as necessary
     live: 'https://github.com/seriesatul'
   },
   {
-    id: 'taskgrid_kanban',
-    title: 'TaskGrid Kanban',
-    url: 'https://taskgrid.app',
+    id: 'bujji_assistant',
+    title: 'BUJJI Desktop Assistant',
+    url: 'https://github.com/seriesatul',
     image: '/images/project-3.png',
     year: '2025',
-    description: 'A highly responsive project management and task boards interface. Utilizes complex drag-and-drop animations, multiple workspace columns, customizable labels, real-time analytics graphs of milestones, and offline syncing.',
-    tags: ['React', 'Redux Toolkit', 'Tailwind CSS', 'PostgreSQL'],
+    description: 'A voice-controlled desktop automation assistant running a Python backend bound to a reactive 2D frontend animator using Eel. Features custom eye/mouth visual states, speech-to-text processing, SQLite logs, and automated system commands.',
+    tags: ['Python', 'SpeechRecognition', 'pyttsx3', 'Eel', 'SQLite', 'JS Animation'],
     github: 'https://github.com/seriesatul',
     live: 'https://github.com/seriesatul'
   }
@@ -46,7 +46,6 @@ export default function SafariApp() {
 
   const activeProject = projects[selectedIdx];
 
-  // 1. GSAP smooth fade & slide transitions when selected project changes
   useEffect(() => {
     if (viewPaneRef.current) {
       gsap.fromTo(
@@ -83,11 +82,7 @@ export default function SafariApp() {
 
   return (
     <div className="flex flex-col h-full bg-white select-none">
-      
-      {/* 1. Safari Browser Header / Address Bar Toolbar */}
       <div className="flex items-center gap-4 px-4 py-3 bg-gray-100 border-b border-gray-200 shrink-0">
-        
-        {/* Navigation Arrows */}
         <div className="flex gap-1">
           <button 
             onClick={handleBack}
@@ -109,23 +104,17 @@ export default function SafariApp() {
           </button>
         </div>
 
-        {/* Pill Shaped Secure URL Address Bar */}
         <div className="flex-1 max-w-xl mx-auto flex items-center justify-center gap-1.5 px-3 py-1 bg-white border border-gray-300 rounded-lg text-xs text-gray-500 shadow-sm">
-          {/* Secure Lock Icon */}
           <svg className="w-3 h-3 fill-emerald-500" viewBox="0 0 24 24">
             <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
           </svg>
           <span className="truncate tracking-wide font-medium text-gray-600">{activeProject.url}</span>
         </div>
 
-        {/* Empty placeholder block to balance the right toolbar width */}
         <div className="w-14" />
       </div>
 
-      {/* 2. Main Layout (Sidebar Project Selector + Viewport Showcase) */}
       <div className="flex flex-1 overflow-hidden h-full">
-        
-        {/* Left Side: Frosted Project Index Sidebar */}
         <div className="w-56 bg-gray-50/90 border-r border-gray-200/50 p-3 flex flex-col gap-4">
           <div>
             <h4 className="text-[10px] font-bold text-gray-400 tracking-wider mb-2 px-2">PROJECTS</h4>
@@ -134,11 +123,7 @@ export default function SafariApp() {
                 <li key={project.id}>
                   <button
                     onClick={() => selectProject(idx)}
-                    className={`w-full flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-left transition-colors cursor-pointer ${
-                      selectedIdx === idx 
-                        ? 'bg-blue-100 text-blue-700 font-semibold shadow-sm' 
-                        : 'hover:bg-gray-200/40'
-                    }`}
+                    className="w-full flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-left transition-colors cursor-pointer hover:bg-gray-200/40"
                   >
                     <span className="text-sm font-bold opacity-60">🌐</span>
                     <span className="truncate">{project.title}</span>
@@ -149,13 +134,9 @@ export default function SafariApp() {
           </div>
         </div>
 
-        {/* Right Side: Active Project Viewport Pane */}
         <div className="flex-1 p-8 overflow-y-auto bg-white select-text">
           <div ref={viewPaneRef} className="max-w-2xl mx-auto space-y-6">
-            
-            {/* Project Image Frame (Simulated browser window mockup) */}
             <div className="relative rounded-lg overflow-hidden border border-gray-200 shadow-md group">
-              {/* Image Toolbar Header dots */}
               <div className="absolute top-3 left-4 flex gap-1.5 z-10">
                 <span className="size-2 rounded-full bg-gray-300" />
                 <span className="size-2 rounded-full bg-gray-300" />
@@ -164,11 +145,10 @@ export default function SafariApp() {
               <img 
                 src={activeProject.image} 
                 alt={activeProject.title} 
-                className="w-full aspect-video object-cover group-hover:scale-101 transition-transform duration-500"
+                className="w-full aspect-video object-cover"
               />
             </div>
 
-            {/* Project Specifications */}
             <div className="space-y-4">
               <div className="flex items-baseline justify-between border-b border-gray-100 pb-2">
                 <h2 className="text-xl font-extrabold text-gray-800">{activeProject.title}</h2>
@@ -177,7 +157,6 @@ export default function SafariApp() {
                 </span>
               </div>
 
-              {/* Technologies Badges */}
               <div className="flex flex-wrap gap-1.5">
                 {activeProject.tags.map((tag, i) => (
                   <span 
@@ -189,12 +168,10 @@ export default function SafariApp() {
                 ))}
               </div>
 
-              {/* Description Writeup */}
               <p className="text-xs leading-relaxed text-gray-600">
                 {activeProject.description}
               </p>
 
-              {/* Action Buttons */}
               <div className="flex gap-3 pt-2">
                 <a 
                   href={activeProject.live} 

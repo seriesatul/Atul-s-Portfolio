@@ -24,9 +24,22 @@ export default function Window({ id, children }) {
       const dragInstance = Draggable.create(windowRef.current, {
         trigger: headerRef.current,
         type: 'x,y',
-        bounds: dragBounds, // Uses #workspace DOM node directly, falling back to 'body' if unmounted
+        bounds: dragBounds,
         onDragEnd: function () {
-          updateWindowPosition(id, this.x, this.y);
+          // 1. Retrieve the latest coordinates directly from the store (avoids stale hook closures)
+          const currentWindow = useOSStore.getState().windows[id];
+          
+          if (currentWindow) {
+            // 2. Compute absolute coordinates by adding the GSAP drag offset to the baseline state
+            const newX = currentWindow.x + this.x;
+            const newY = currentWindow.y + this.y;
+            
+            // 3. Write absolute coordinates to state
+            updateWindowPosition(id, newX, newY);
+            
+            // 4. Immediately clear GSAP's transform offset to prevent double-shifting layout jumps
+            gsap.set(windowRef.current, { x: 0, y: 0 });
+          }
         }
       });
 

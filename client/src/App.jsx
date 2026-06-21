@@ -18,6 +18,8 @@ import ResumeApp from './components/apps/ResumeApp';
 import ContactApp from './components/apps/ContactApp';
 
 import { useOSStore } from './store/useOSStore';
+import AboutApp from './components/apps/AboutApp';
+import QuickTimePlayerApp from './components/apps/QuickTimePlayerApp';
 
 export default function App() {
   const [isBooting, setIsBooting] = useState(true);
@@ -90,9 +92,17 @@ export default function App() {
             <ResumeApp />
           </Window>
 
+          <Window id="about">
+            <AboutApp />
+          </Window>
+
           <Window id="contact">
             <ContactApp />
           </Window>
+
+          <Window id="quicktime">
+          <QuickTimePlayerApp />
+        </Window>
         </div>
 
         {/* 3D Glass Dock Menu */}
